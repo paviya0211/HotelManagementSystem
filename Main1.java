@@ -83,7 +83,7 @@ public class Main1 {
 
     public static void generateBill(Scanner sc) {
 
-        System.out.print("Enter Room Number (1-200): ");
+        System.out.print("enter Room Number (1-200): ");
         int room = sc.nextInt();
 
         if (room < 1 || room > 200) {

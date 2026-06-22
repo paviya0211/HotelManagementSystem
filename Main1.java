@@ -47,7 +47,7 @@ public class Main1 {
 
         if (!booked[room - 1]) {
 
-            System.out.print("Enter Customer Name: ");
+            System.out.print("enter Customer Name: ");
             customer[room - 1] = sc.nextLine();
 
             booked[room - 1] = true;

@@ -3,7 +3,10 @@ import java.util.Scanner;
 public class Main1 {
 
     static boolean[] booked = new boolean[200];
-    static String[] customer = new String[200];
+    static String[] customer_name=new String[200];
+    static String[] mobile=new String[200];
+    Static String[] address=new String[200];
+    Static String[] stayDays= new int[200];
 
     static String[] roomType = {
             "AC Single",
@@ -13,19 +16,13 @@ public class Main1 {
     };
 
     static int[] price = {12000, 18000, 5000, 8000};
-
     public static void viewRooms() {
-
         System.out.println("\n----- ROOM DETAILS -----");
-
         for (int i = 0; i < 200; i++) {
-
             int typeIndex = i % 4;
-
             System.out.print("Room " + (i + 1) + " | "
                     + roomType[typeIndex] + " | Rs."
                     + price[typeIndex]);
-
             if (booked[i]) {
                 System.out.println(" | Booked");
             } else {
@@ -46,15 +43,32 @@ public class Main1 {
         }
 
         if (!booked[room - 1]) {
+            int typeIndex=(room-1)%4;
 
-            System.out.print("enter Customer Name: ");
-            customer[room - 1] = sc.nextLine();
+            System.out.println("Room Type:"+roomType[typeIndex]);
+            System.out.println("Price/Day:Rs."+ price[typeIndex]);
 
-            booked[room - 1] = true;
+            System.out.print("Enter Customer Name: "); 
+           customer_name[room-1]=sc.nextLine();
+
+            System.out.print("Enter the Mobile Number: ");
+            mobile[room-1]=sc.nextLine();
+
+            System.out print("Enter Adress: ");
+            address[room-1]=sc.nextLine();
+
+            System.out.print("Enter Number of Days to Stay: ");
+            stayDays[room-1]=sc.nextInt();
+
+            booked[room - 1] = true; 
 
             System.out.println("Room Booked Successfully!");
-
-        } else {
+            System.out.println("Customer Name : "+ customer_name[room-1]);
+            System.out.println("Room Number :"+ room);
+            System.out.println("Room Type :"+ roomtype[typeIndex]);
+            System.out.println("Stay Days :"+ stayDays[room-1]);
+        } 
+        else {
             System.out.println("Room Already Booked!");
         }
     }
@@ -70,20 +84,24 @@ public class Main1 {
         }
 
         if (booked[room - 1]) {
+             System.out.println("Customer " + customerName[room - 1] + " checked out successfully.");
 
             booked[room - 1] = false;
-            customer[room - 1] = null;
+            customerName[room - 1] = null;
+            mobile[room - 1] = null;
+            address[room - 1] = null;
+            stayDays[room - 1] = 0;
 
-            System.out.println("Checkout Successful!");
-
-        } else {
+           
+        } 
+        else {
             System.out.println("Room Not Booked!");
         }
     }
 
     public static void generateBill(Scanner sc) {
 
-        System.out.print("enter Room Number (1-200): ");
+        System.out.print("Enter Room Number (1-200): ");
         int room = sc.nextInt();
 
         if (room < 1 || room > 200) {
@@ -93,26 +111,22 @@ public class Main1 {
 
         if (booked[room - 1]) {
 
-            System.out.print("Enter Number of Days: ");
-            int days = sc.nextInt();
-
             int typeIndex = (room - 1) % 4;
-
-            int bill = days * price[typeIndex];
+            int roomCharge = stayDays[room - 1] * price[typeIndex];
+            double gst = roomCharge * 0.18;
+            double totalBill = roomCharge + gst;
 
             System.out.println("\n----- BILL -----");
-            System.out.println("Customer Name : "
-                    + customer[room - 1]);
-            System.out.println("Room Number   : "
-                    + room);
-            System.out.println("Room Type     : "
-                    + roomType[typeIndex]);
-            System.out.println("Days Stayed   : "
-                    + days);
-            System.out.println("Total Bill    : Rs."
-                    + bill);
+            System.out.println("Customer Name : " + customer_name[room - 1]);
+            System.out.println("Mobile Number   : "+ mobile[room-1]);
+            System.out.println("Room Number   : "+ room);
+            System.out.println("Room Type     : "+ roomType[typeIndex]);
+            System.out.println("Days Stayed   : "+ stayDays[room-1]);
+            System.out.println("GST (18%) :Rs."+gst);
+            System.out.println("Total Bill    : Rs."+ totalbill);
 
-        } else {
+        } 
+        else {
             System.out.println("Room Not Booked!");
         }
     }
